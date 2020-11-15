@@ -1,0 +1,56 @@
+<div class="lavi">
+  <img src="https://www.fpsa.com/wp-content/uploads/injection-plasturgie-medical-FPSA.jpg" id="bg" alt="">
+
+  <div class="row">
+      <div class="col-md-12 ">
+
+        <div class="card my-5 clasamea">
+          <div class="card-body">
+
+            <nav class="navbar navbar-light" style="background-color: lightsteelblue ">
+              <button (click)="add()" class="btn btn-secondary "> Add</button>
+
+              <div class="form-inline">
+                <div class="input-group">
+                  <label for="search"></label>
+                  <input id="search" type="text" [(ngModel)]="searchValue" class="form-control">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </nav>
+
+            <div class="row">
+              <div class="col-sm-4"
+                   *ngFor="let ca of cabinetlist | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
+                <div class="card text-black-50  mb-5" style="background-color: lightsteelblue">
+
+                  <div class="card-body">
+
+                    <img *ngIf="ca.photo | async as photo" [src]="photo[0].url" height="250px" class="card-img-top"
+                         alt="...">
+
+                    <div style="height: 200px">
+                      <h5 class="card-title">{{ca.name}}</h5>
+                      <h6 class="card-text">{{ca.description}}</h6>
+                      <h6 class="card-text">{{ca.phone}}</h6>
+                      <h6 class="card-text"> Adresa: {{ca.address.country}}</h6>
+                      <h6 class="card-text">Oras:{{ca.address.city}}</h6>
+                      <h6 class="card-text">Strada: {{ca.address.street}}</h6>
+                    </div>
+                    <div class="btn-group">
+                      <button (click)="goToMedicCabinet(ca.id)" class="btn btn-secondary "> View</button>
+                      <button (click)="edit(ca.id)" class="btn btn-primary mx-1"> Edit</button>
+                      <button (click)="delete(ca.id)" class="btn btn-danger mx-1"> Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>

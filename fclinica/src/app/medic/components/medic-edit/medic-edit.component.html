@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row" style="margin-top: 20px">
+
+    <div class="col-md-3">
+      <div class="text-center">
+
+        <div class="text-center">
+          <div class="text-center">
+            <img *ngIf="medic.photo | async as photo " [src]="photo[0].url" class="avatar img-circle"
+                 alt="avatar">
+          </div>
+        </div>
+        <div *ngIf="previewUrl">
+          <img [src]="previewUrl" class="avatar img-circle" alt="avatar"/>
+        </div>
+        <h6 *ngIf="!previewUrl">Upload a different photo...</h6>
+        <h6 *ngIf="previewUrl">New photo selected...</h6>
+        <div class="btn-group">
+          <label class="btn btn-danger mr-1"> Choose File
+            <input type="file" name="image" (change)="selectFile($event)"/>
+          </label>
+          <button class="btn btn-primary" style="height: 38px" (click)="changePhoto()">Save</button>
+        </div>
+
+      </div>
+    </div>
+    <div *ngIf="currentFile" class="progress">
+      <div
+        class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar"
+        attr.aria-valuenow="{{ progress }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [ngStyle]="{ width: progress + '%' }"
+      >
+        {{ progress }}%
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="card my-5">
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit()" #medicEdit="ngForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" [(ngModel)]="medic.name"
+                       class="form-control"
+                       id="name"
+                       name="name"
+                       placeholder="Enter medic name"
+                       required #name="ngModel">
+              </div>
+              <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
+
+              <div class="form-group">
+                <label for="name">Phone</label>
+                <input type="text" [(ngModel)]="medic.phone"
+                       class="form-control"
+                       id="phone"
+                       name="phone"
+                       placeholder="Enter medic phone"
+                       required #phone="ngModel">
+              </div>
+              <div [hidden]="!phone.pristine" class="alert alert-danger">Phone is required</div>
+
+              <div class="form-group">
+                <label for="cabinet">Cabinet</label>
+                <ng-multiselect-dropdown
+                  [data]="cabinet"
+                  id="cabinet"
+                  [(ngModel)]="selectedCabinet"
+                  [ngModelOptions]="{standalone: true}"
+                  [settings]="dropdownSettings"
+                  (onSelect)="onItemSelect($event)"
+                  (onSelectAll)="onSelectAll($event)"
+                >
+                </ng-multiselect-dropdown>
+              </div>
+              <div [hidden]="" class="alert alert-danger">Cabinet is required</div>
+
+              <div class="form-group">
+                <label for="specializationModel">Specialization</label>
+                <input type="text" [(ngModel)]="medic.specializationModel"
+                       class="form-control"
+                       id="specializationModel"
+                       name="specializationModel"
+                       placeholder="Enter medic specialization"
+                       required #specializationModel="ngModel">
+              </div>
+              <div [hidden]="!specializationModel.pristine" class="alert alert-danger">Specialization is required</div>
+
+
+              <div class="btn-group">
+                <a (click)="getMedicList()"
+                   class="btn btn-secondary mx-1">Back
+                </a>
+                <button type="submit" [disabled]="!medicEdit.form.valid"
+                        class="btn btn-info">Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

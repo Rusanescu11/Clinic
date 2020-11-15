@@ -1,0 +1,50 @@
+<div class="container">
+  <img src="https://www.fpsa.com/wp-content/uploads/injection-plasturgie-medical-FPSA.jpg" id="bg" alt="">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card my-5">
+        <div class="card-body">
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="btn-group" style="padding-right: 300px">
+              <div class="btn-group" style="padding-right: 300px">
+                <button (click)="add()" class="btn btn-success "> Add</button>
+              </div>
+            </div>
+            <div class="navbar-nav" style="padding-right: 340px">
+              <h4 class="nav-item text-primary text-center"><strong>Doctor</strong></h4>
+            </div>
+          </nav>
+
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let medic of medic ">
+              <div class="card text-black-50 bg-light mb-4">
+                <div class="card-body">
+                  <div *ngIf="ifHasPhoto(medic)">
+                    <img src="https://www.clker.com/cliparts/d/L/P/X/z/i/no-image-icon-hi.png"   height="250px"  class="card-img-top" alt="...">
+                  </div>
+                  <div *ngIf="!ifHasPhoto(medic)">
+                    <img *ngIf="medic.photo | async as photo"  [src]="photo[0].url"   height="250px"  class="card-img-top" alt="...">
+                  </div>
+                  <div style="height: 150px">
+                    <h5 class="card-title">Name:{{medic.name}}</h5>
+                    <h6 class="card-text">Phone:{{medic.phone}}</h6>
+                    <h6 class="card-text">Cabinet:{{medic.cabinet.name}}</h6>
+                    <h6 class="card-text">Specialization:{{medic.specializationModel}}</h6>
+                  </div>
+                  <div class="btn-group">
+                    <button (click)="edit(medic.id)" class="btn btn-primary mx-1"> Edit</button>
+                    <button (click)="delete(medic.id)" class="btn btn-danger mx-1"> Delete</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

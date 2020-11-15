@@ -1,0 +1,32 @@
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+
+.navbar-nav {
+
+  opacity: inherit;
+}
+
+#bg {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: 800px;
+  width: 1400px;
+}
+
+.row {
+  color: rgba(255, 224, 224, 2.75); /* RGBA Color (Alternative Transparency) */
+
+}
+
+/*.clasamea {*/
+/*background-color: lightsteelblue;*/
+/*}*/
+
+
